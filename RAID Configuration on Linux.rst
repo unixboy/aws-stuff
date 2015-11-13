@@ -4,13 +4,15 @@ Use the following procedure to create the RAID array. Note that you can get dire
 
 To create a RAID array on Linux
 
-  Create the Amazon EBS volumes for your array. For more information, see Creating an Amazon EBS Volume.
+Create the Amazon EBS volumes for your array. For more information, see Creating an Amazon EBS Volume.
 
-  Important
+Important
 
- Create volumes with identical size and IOPS performance values for your array. Make sure you do not create an array   that exceeds the available bandwidth of your EC2 instance. For more information, see Amazon EC2 Instance Configuratin.
+Create volumes with identical size and IOPS performance values for your array. Make sure you do not create an array   that exceeds the available bandwidth of your EC2 instance. For more information, see Amazon EC2 Instance Configuratin.
 
- Attach the Amazon EBS volumes to the instance that you want to host the array. For more information, see Attaching an  Amazon EBS Volume to an Instance.
+Attach the Amazon EBS volumes to the instance that you want to host the array. For more information, see Attaching an 
+
+Amazon EBS Volume to an Instance.
 
 Use the mdadm command to create a logical RAID device from the newly attached Amazon EBS volumes. Substitute the number of volumes in your array for number_of_volumes and the device names for each volume in the array (such as /dev/xvdf) for device_name. You can also substitute MY_RAID with your own unique name for the array.
 
@@ -58,17 +60,18 @@ Your RAID device is now ready for use.
 
 (Optional) To mount this Amazon EBS volume on every system reboot, add an entry for the device to the /etc/fstab file.
 
- Create a backup of your /etc/fstab file that you can use if you accidentally destroy or delete this file while you are editing it.
+Create a backup of your /etc/fstab file that you can use if you accidentally destroy or delete this file while you are editing it.
 
  ::
    
-   [ec2-user ~]$ sudo cp /etc/fstab /etc/fstab.orig
+  [ec2-user ~]$ sudo cp /etc/fstab /etc/fstab.orig
 
-   Open the /etc/fstab file using your favorite text editor, such as nano or vim.
 
-   Add a new line to the end of the file for your volume using the following format.
+ Open the /etc/fstab file using your favorite text editor, such as nano or vim.
 
-   device_label  mount_point  file_system_type  fs_mntops  fs_freq  fs_passno  
+ Add a new line to the end of the file for your volume using the following format.
+
+ device_label  mount_point  file_system_type  fs_mntops  fs_freq  fs_passno  
 
 The last three fields on this line are the file system mount options, the dump frequency of the file system, and the order of file system checks done at boot time. If you don't know what these values should be, then use the values in the example below for them (defaults,nofail 0 2). For more information on /etc/fstab entries, see the fstab manual page (by entering man fstab on the command line). For example, to mount the ext4 file system on the device with the label MY_RAID at the mount point /mnt/raid, add the following entry to /etc/fstab.
 
@@ -102,5 +105,7 @@ Errors in the /etc/fstab file can render a system unbootable. Do not shut down a
 
     
 
+::
 
 
+ https://raid.wiki.kernel.org/index.php/Linux_Raid
