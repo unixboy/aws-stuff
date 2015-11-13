@@ -20,7 +20,7 @@ Note
 
 You can list the devices on your instance with the lsblk command to find the device names.
 
- (RAID 0 only) To create a RAID 0 array, execute the following command (note the --level=0 option to stripe the array):
+(RAID 0 only) To create a RAID 0 array, execute the following command (note the --level=0 option to stripe the array):
 
  ::
  
